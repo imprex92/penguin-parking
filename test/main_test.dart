@@ -1,4 +1,4 @@
-import 'package:cli/cli.dart';
+import 'package:penguin_parking/main.dart';
 import 'package:test/test.dart';
 
 void main() {
