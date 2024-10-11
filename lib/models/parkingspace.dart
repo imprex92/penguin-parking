@@ -1,9 +1,9 @@
-class ParkingSpace {
+class Parkingspace {
   final String id;
   final String address;
   final String hourPrice;
 
-  ParkingSpace({
+  Parkingspace({
     required this.id,
     required this.address,
     required this.hourPrice,
