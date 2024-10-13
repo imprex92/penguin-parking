@@ -1,17 +1,20 @@
 class Broom {
-  final String type;
-  final String brand;
-  final String model;
-  final String? color;
-  final String plateNumber;
-  final String owner;
+  String type;
+  String brand;
+  String model;
+  String plateNumber;
+  int owner;
 
   Broom({
     required this.type,
     required this.brand,
     required this.model,
-    this.color,
     required this.plateNumber,
     required this.owner,
   });
+
+  @override
+  String toString() {
+    return 'Broom{type: $type, brand: $brand, model: $model, plateNumber: $plateNumber, owner: $owner}';
+  }
 }
