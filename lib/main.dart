@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:penguin_parking/utils/broomexploiter.dart';
 import 'package:penguin_parking/utils/calculate_fee.dart';
+import 'package:penguin_parking/utils/humanexploiter.dart';
 import 'package:penguin_parking/utils/searcher.dart';
 import 'package:penguin_parking/utils/validator.dart';
 import 'package:penguin_parking/work_on_broom.dart';
@@ -28,12 +30,13 @@ void askWhatToDo() {
   print('4. Parkings');
   print('5. Search for brooms by specific owner');
   print('6. I want to calculate parking fee');
-  print('7. Exit');
+  print("7. I'm lazy and want to apply mock data");
+  print('8. Exit');
 
   String? whatHandle = stdin.readLineSync();
 
   while (!inputValidation(input: whatHandle, expectedType: ExpectedType.int)) {
-    print('Invalid input. Please enter a number between 1 and 6.');
+    print('Invalid input. Please enter a number between 1 and 8.');
     whatHandle = stdin.readLineSync();
   }
 
@@ -57,6 +60,8 @@ void askWhatToDo() {
       calculateParkingFee();
       break;
     case 7:
+      applyMockData();
+    case 8:
       print('Goodbye!');
       exitCode = 0;
       break;
@@ -89,5 +94,35 @@ void whatToDoNext() {
     default:
       print('Invalid input. Please enter a number between 1 and 2.');
       whatToDoNext();
+  }
+}
+
+void applyMockData() {
+  print(
+      'Would you like to apply mock data? This will overwrite existing data.');
+  print('1. Yes');
+  print('2. No');
+
+  String? applyMockData = stdin.readLineSync();
+
+  while (
+      !inputValidation(input: applyMockData, expectedType: ExpectedType.int)) {
+    print('Invalid input. Please enter a number between 1 and 2.');
+    applyMockData = stdin.readLineSync();
+  }
+
+  switch (int.parse(applyMockData!)) {
+    case 1:
+      HumanRepository().applyMockData();
+      BroomRepository().applyMockData();
+      whatToDoNext();
+      break;
+    case 2:
+      print('No mock data applied.');
+      whatToDoNext();
+      break;
+    default:
+      print('Invalid input. Please enter a number between 1 and 2.');
+      askWhatToDo();
   }
 }
