@@ -57,7 +57,7 @@ addNewHumanLifesign() async {
   while (
       !inputValidation(expectedType: ExpectedType.int, input: personalNumber)) {
     print('Invalid input. Please enter a valid personal number.');
-    addNewHumanLifesign();
+    personalNumber = stdin.readLineSync();
   }
 
   Human newHuman =

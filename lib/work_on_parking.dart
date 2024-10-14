@@ -60,6 +60,7 @@ void startNewParking() {
     for (int i = 0; i < allHumans.length; i++) {
       print('$i. ${allHumans[i].name} (${allHumans[i].personalNumber})');
     }
+
     String? selectedHuman = stdin.readLineSync();
     while (!inputValidation(
         input: selectedHuman, expectedType: ExpectedType.int)) {
@@ -68,25 +69,22 @@ void startNewParking() {
       selectedHuman = stdin.readLineSync();
     }
     Human? humanToPark = allHumans[int.parse(selectedHuman!)];
-    if (humanToPark.broomList.length > 1) {
-      print(
-          'The human has more than one broom. Please select the broom to park:');
-      for (int i = 0; i < humanToPark.broomList.length; i++) {
-        print(
-            '$i. ${humanToPark.broomList[i].brand} (${humanToPark.broomList[i].plateNumber})');
-      }
-      String? selectedBroom = stdin.readLineSync();
-      while (!inputValidation(
-          input: selectedBroom, expectedType: ExpectedType.int)) {
-        print(
-            'Invalid input. Please enter a number between 0 and ${humanToPark.broomList.length}.');
-        selectedBroom = stdin.readLineSync();
-      }
-      broomToPark = humanToPark.broomList[int.parse(selectedBroom!)];
-    } else {
-      broomToPark = humanToPark.broomList[0];
+
+    print('Please select the broom to park:');
+    for (int i = 0; i < humanToPark.broomList.length; i++) {
+      print('$i. ${humanToPark.broomList[i]}');
     }
 
+    String? selectedBroom = stdin.readLineSync();
+    while (!inputValidation(
+        input: selectedBroom, expectedType: ExpectedType.int)) {
+      print(
+          'Invalid input. Please enter a number between 0 and ${humanToPark.broomList.length}.');
+      selectedBroom = stdin.readLineSync();
+    }
+    broomToPark = humanToPark.broomList[int.parse(selectedBroom!)];
+
+    print(broomToPark);
     print(
         'Please select the parking space where the parking is going to start:');
     for (int i = 0; i < allParkingSpaces.length; i++) {
@@ -105,7 +103,15 @@ void startNewParking() {
 
     Parking newParking =
         Parking(broom: broomToPark, parkingSpace: atParkingSpace.id);
-    ParkingRepository().addAndStartParking(newParking);
+    print(newParking);
+    bool status = ParkingRepository().addAndStartParking(newParking);
+    if (status) {
+      print('Parking started successfully! Happy parking!');
+      askWhatToDo();
+    } else {
+      print('Error starting parking. Please try again.');
+      askWhatToDo();
+    }
   }
 }
 
@@ -130,6 +136,7 @@ void finishParking() {
     double feeToPay = ParkingRepository()
         .removeParkingOccupantAndFinishParking(parkingToFinish.broom);
     print('The parking has been finished. The fee to pay is: \$$feeToPay');
+    whatToDoNext();
   }
 }
 
@@ -142,7 +149,8 @@ void getAllParkings() {
     print(
         'There are currently ${allParkings.length} ${allParkings.length == 1 ? 'parking' : 'parkings'} in the system:');
     for (int i = 0; i < allParkings.length; i++) {
-      print('$i. ${allParkings[i].broom} - ${allParkings[i].parkingSpace}');
+      print(
+          '${i + 1}. ${allParkings[i].broom} - ${allParkings[i].parkingSpace}');
     }
     whatToDoNext();
   }
