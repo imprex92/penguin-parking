@@ -211,7 +211,6 @@ void deleteBroom() {
 registerOnHumanAndSave(Broom newBroom, int personalNumber) {
   bool didItWork = BroomRepository().addBroom(newBroom);
   if (didItWork) {
-    print(didItWork);
     Human? updated = HumanRepository()
         .registerOneBroomToLifeSign(personalNumber, newBroom.plateNumber);
     bool completed = updated.broomList.singleWhereOrNull(

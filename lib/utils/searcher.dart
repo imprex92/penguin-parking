@@ -10,7 +10,8 @@ findBroomsByOwner() {
     print('There are no humans registered in the system.');
     askWhatToDo();
   }
-  print('There are currently ${allHumans.length} brooms in the system');
+  print(
+      'There are currently ${allHumans.length} ${allHumans.length > 1 ? 'humans' : 'human'} in the system');
   for (int i = 0; i < allHumans.length; i++) {
     print('$i. ${allHumans[i].name} (${allHumans[i].personalNumber})');
   }
@@ -31,10 +32,11 @@ findBroomsByOwner() {
   if (broomsOwnedByHuman.isEmpty) {
     print('This human does not own any brooms.');
   } else {
-    print('This human owns ${broomsOwnedByHuman.length} brooms:');
+    print(
+        'This human owns ${broomsOwnedByHuman.length} ${broomsOwnedByHuman.length > 1 ? 'brooms' : 'broom'}:');
     for (int i = 0; i < broomsOwnedByHuman.length; i++) {
-      print(
-          '${i + 1}. ${broomsOwnedByHuman[i].type} - ${broomsOwnedByHuman[i].plateNumber}');
+      print('${i + 1}. Licence plate - ${broomsOwnedByHuman[i]}');
     }
   }
+  whatToDoNext();
 }
