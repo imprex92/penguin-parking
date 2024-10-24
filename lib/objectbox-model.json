@@ -1,0 +1,145 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2895106505521110666",
+      "lastPropertyId": "6:6231148601853380489",
+      "name": "Broom",
+      "properties": [
+        {
+          "id": "1:4698166229573174396",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8603056917466489642",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "3:1250451529634176594",
+          "name": "brand",
+          "type": 9
+        },
+        {
+          "id": "4:7966860652952440547",
+          "name": "model",
+          "type": 9
+        },
+        {
+          "id": "5:3000006911049833384",
+          "name": "plateNumber",
+          "type": 9
+        },
+        {
+          "id": "6:6231148601853380489",
+          "name": "ownerId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:3893832293609619724",
+          "relationTarget": "Human"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3241333599493169689",
+      "lastPropertyId": "3:1926599540274282453",
+      "name": "Human",
+      "properties": [
+        {
+          "id": "1:5750605337010198308",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4775733589677076979",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1926599540274282453",
+          "name": "personalNumber",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:1485723566047156430",
+      "lastPropertyId": "5:5262063710809240597",
+      "name": "Parking",
+      "properties": [
+        {
+          "id": "1:1492954929315570248",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1744510508214583991",
+          "name": "broomId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:1609095063182143983",
+          "relationTarget": "Broom"
+        },
+        {
+          "id": "3:8389273029862230107",
+          "name": "parkingSpace",
+          "type": 9
+        },
+        {
+          "id": "4:3535554185888350406",
+          "name": "startTime",
+          "type": 10
+        },
+        {
+          "id": "5:5262063710809240597",
+          "name": "endTime",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:8747137452316726021",
+      "lastPropertyId": "3:7716191921161776051",
+      "name": "ParkingSpace",
+      "properties": [
+        {
+          "id": "1:4474802698844643355",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7289835380435068690",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "3:7716191921161776051",
+          "name": "hourPrice",
+          "type": 8
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:8747137452316726021",
+  "lastIndexId": "2:1609095063182143983",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

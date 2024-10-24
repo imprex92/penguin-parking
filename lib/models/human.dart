@@ -1,21 +1,21 @@
-import 'package:uuid/uuid.dart';
-
 class Human {
-  List broomList;
-  String id;
   String name;
   int personalNumber;
+  List<String> broomList;
 
-  Human(
-      {String? id,
-      required this.name,
-      required this.personalNumber,
-      List? broomList})
-      : id = id ?? Uuid().v4(),
-        broomList = broomList ?? [];
+  Human({
+    required this.name,
+    required this.personalNumber,
+    List<String>? broomList,
+  }) : broomList = broomList ?? [];
+
+  bool isValid() {
+    // Implement validation logic here maybe?
+    return name.isNotEmpty && personalNumber > 0;
+  }
 
   @override
   String toString() {
-    return 'Human{id: $id, name: $name, personalNumber: $personalNumber, broomList: $broomList}';
+    return 'Human{name: $name, personalNumber: $personalNumber, broomList: $broomList}';
   }
 }

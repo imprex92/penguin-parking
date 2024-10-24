@@ -3,7 +3,32 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as io;
 
+import 'package:penguin_parking/objectBox/objectBox_model.dart';
+import 'package:penguin_parking/objectbox.g.dart';
+
+late final Store store;
+late final Box<Human> humanBox;
+late final Box<Broom> broomBox;
+late final Box<Parking> parkingBox;
+late final Box<ParkingSpace> parkingSpaceBox;
+
 void main() async {
+  try {
+    store = await openStore();
+    humanBox = store.box<Human>();
+    broomBox = store.box<Broom>();
+    parkingBox = store.box<Parking>();
+    parkingSpaceBox = store.box<ParkingSpace>();
+  } catch (err) {
+    print('Something went wrong initializing the objectBox stores: $err');
+  } finally {
+    // close the stores when app exits
+    ProcessSignal.sigint.watch().listen((signal) async {
+      store.close();
+      exit(0);
+    });
+  }
+
   final router = Router();
 
   router.get('/', (Request request) {
@@ -28,6 +53,10 @@ void main() async {
 
   router.delete('/lifesigns/<id>', (Request request, String id) {
     return Response.ok('delete()');
+  });
+
+  router.all('/<ignored|.*>', (Request request) {
+    return Response.notFound('Page not found');
   });
 
   final handler =
